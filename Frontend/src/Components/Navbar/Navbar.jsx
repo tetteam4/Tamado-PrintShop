@@ -105,7 +105,7 @@ function Navbar() {
         {/* Mobile Menu Icon */}
         <div className="md:hidden text-white">
           <button>
-            <FaBars className="text-2xl text-pink-500" />{" "}
+            <FaBars className="text-2xl text-yellow-500" />{" "}
             {/* Mobile menu icon color */}
           </button>
         </div>
