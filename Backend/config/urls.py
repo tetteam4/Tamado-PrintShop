@@ -28,4 +28,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path("admin/", admin.site.urls),
     
-] 
+]
+admin.site.site_header = 'Tamadon Admin'
+admin.site.site_title = 'Tamando Admin Area.'
+admin.site.index_title = 'Welcome to the Tamando administration '
