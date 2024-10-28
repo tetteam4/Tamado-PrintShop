@@ -7,13 +7,12 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Management Learning System Backend APIs",
+        title="Tamadon MIS System Backend APIs",
         default_version='v1',
         description=(
-            "This is the API documentation for TESOl LMS project APIs.\n\n"
+            "This is the API documentation for Tamadon MIS System APIs.\n\n"
             "Contacts:\n"
             "- Ali Sina Sultani: alisinasultani@gmail.com\n"
-            "- Abbas Alizadah: abbas.alizadah1380@gmail.com"
         ),
         contact=openapi.Contact(email="alisinasultani@gmail.com"),
         license=openapi.License(name="MIT"),
@@ -28,4 +27,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path("admin/", admin.site.urls),
     
-] 
+]
+admin.site.site_header = 'Tamadon Admin'
+admin.site.site_title = 'Tamando Admin Area.'
+admin.site.index_title = 'Welcome to the Tamando administration '
