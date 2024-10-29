@@ -36,17 +36,21 @@ THIRD_PARTY_APPS = [
     "djoser",
     "rest_framework_simplejwt",
     'drf_yasg',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
     "accounts.apps.AccountsConfig",  
     "profiles.apps.ProfilesConfig",
+    "api.apps.ApiConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Add this line
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -177,3 +181,9 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Your React app's URL
+]
+CORS_ALLOW_ALL_ORIGINS = True
