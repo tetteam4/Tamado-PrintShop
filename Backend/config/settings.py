@@ -18,18 +18,33 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 
-    'rest_framework_simplejwt',
-    'drf_yasg',
-    'rest_framework',
-    'djoser',
+    'django.contrib.staticfiles',
 ]
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "django_filters",
+    "phonenumber_field",
+    "djoser",
+    "rest_framework_simplejwt",
+    'drf_yasg',
+]
+
+LOCAL_APPS = [
+    "accounts.apps.AccountsConfig",  
+    "profiles.apps.ProfilesConfig",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -39,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -137,7 +153,7 @@ SIMPLE_JWT = {
     ),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "SIGNING_KEY": settings.SIGNING_KEY,
+    "SIGNING_KEY": "407515a46c46ab6860ba95c79b323f03cb93870ded8d01fa65aa0230f1cd2681",
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
@@ -155,9 +171,9 @@ DJOSER = {
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {
-        "user_create": "apps.users.serializers.CreateUserSerializer,",
-        "user": "apps.users.serializers.UserSerializer",
-        "current_user": "apps.users.serializers.UserSerializer",
+        "user_create": "accounts.serializers.CreateUserSerializer,",
+        "user": "accounts.serializers.UserSerializer",
+        "current_user": "accounts.serializers.UserSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }

@@ -1,7 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
-
 import secrets
 import django
 from django.contrib.auth import get_user_model
@@ -11,5 +7,5 @@ from django.conf import settings
 signing_key = secrets.token_hex(32)  # 64-character hex string
 print(signing_key)
 
-new_user = settings.AUTH_USER_MODEL.objects.create(username='admin', email='admin@gmail.com')
+new_user = settings.AUTH_USER_MODEL.objects.create(username='john_doe', email='john@example.com')
 print(f"User ID: {new_user.id}")

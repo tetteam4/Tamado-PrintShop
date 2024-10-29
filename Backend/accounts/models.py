@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser):
     pkid = models.BigAutoField(primary_key=True, editable=False)
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     username = models.CharField(verbose_name=_("Username"), max_length=255, unique=True)
@@ -31,9 +31,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
-    @property
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
 
     def get_short_name(self):
         return self.username
+    
+
+# new_user = User.objects.create(username='admin', email='admin@gamil.com')
+# print(f"User ID: {new_user.id}")
