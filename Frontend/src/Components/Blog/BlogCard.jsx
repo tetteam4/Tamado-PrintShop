@@ -9,21 +9,21 @@ const BlogCard = ({ item }) => {
   const handleComment = () => setComments(comments + 1);
 
   return (
-    <div className="bg-white dark:bg-gray-800  shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-      <div className="grid grid-cols-3 h-[320px]">
+    <div className="bg-white dark:bg-gray-800 rounded-md  shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <div className="md:grid justify-between grid-cols-2 md:grid-cols-3 sm:h-[400px]  md:h-[320px]">
         {/* Image Section */}
         <div className="col-span-1 overflow-hidden">
           <img
             src={item.image}
             alt={item.title}
-            className="w-full h-full object-cover  transition-transform duration-300 group-hover:scale-110"
+            className="w-full md:h-full h-[170px] rounded-md  object-cover  transition-transform duration-300 group-hover:scale-110"
           />
         </div>
 
         {/* Content Section */}
-        <div className="col-span-2 p-6 flex flex-col justify-between">
+        <div className="md:col-span-2 col-span-1 p-6 flex flex-col justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+            <h1 className="md:text-xl text-md font-bold text-gray-800 dark:text-white mb-2">
               {item.title}
             </h1>
             <p className="text-gray-600 dark:text-gray-300 text-justify mb-4">
