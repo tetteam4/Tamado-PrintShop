@@ -14,10 +14,17 @@
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.5",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "axios": "^1.7.7",
 =======
     "framer-motion": "^11.11.10",
 >>>>>>> cdfd7964ae8975eb0d9fd340f1465a2b60a63aaa
+=======
+    "framer-motion": "^11.11.10",
+=======
+    "axios": "^1.7.7",
+>>>>>>> 7f0d123b832f483151f096dececc70fa02fae179
+>>>>>>> 42faeab4ba392bca7ab04f5cee014ebfe1a3b85c
     "i": "^0.3.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
