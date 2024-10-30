@@ -31,7 +31,9 @@ const UserManagement = () => {
   const handleAddUser = (e) => {
     e.preventDefault();
     const newUserWithId = { ...newUser, id: Date.now() };
-    setUsers((prevUsers) => [...prevUsers, newUserWithId]);
+    const response =axios.get('http//8000:account/api/auth/users')
+console.log((response))
+     setUsers((prevUsers) => [...prevUsers, newUserWithId]);
 
     // Clear the form
     setNewUser({
@@ -126,11 +128,11 @@ const UserManagement = () => {
               required
             />
             <input
-              type="text"
+              type="file"
               name="photo"
               value={newUser.photo}
               onChange={handleInputChange}
-              placeholder="لینک عکس"
+              placeholder=" عکس"
               className="p-2 border border-gray-300 rounded"
             />
           </div>
@@ -147,13 +149,13 @@ const UserManagement = () => {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">نام کاربری</th>
-            <th className="py-2 px-4 border-b">نام</th>
-            <th className="py-2 px-4 border-b">تخلص</th>
-            <th className="py-2 px-4 border-b">ایمیل</th>
-            <th className="py-2 px-4 border-b">شماره تماس</th>
-            <th className="py-2 px-4 border-b">عکس</th>
-            <th className="py-2 px-4 border-b">عملیات</th>
+            <th className="py-2 px-4 border-2">نام کاربری</th>
+            <th className="py-2 px-4 border-2">نام</th>
+            <th className="py-2 px-4 border-2">تخلص</th>
+            <th className="py-2 px-4 border-2">ایمیل</th>
+            <th className="py-2 px-4 border-2">شماره تماس</th>
+            <th className="py-2 px-4 border-2">عکس</th>
+            <th className="py-2 px-4 border-2">عملیات</th>
           </tr>
         </thead>
         <tbody>
