@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const AddOrder = () => {
   const [formData, setFormData] = useState({
     name: '',
+    customerName: '', // New field for customer name
     description: '',
     category: '',
     designer: ''
@@ -36,7 +37,7 @@ const AddOrder = () => {
         
         {/* Name Field */}
         <div>
-          <label className="block text-lg font-medium">نام:</label>
+          <label className="block text-lg font-medium">نام سفارش:</label>
           <input
             type="text"
             name="name"
@@ -44,6 +45,20 @@ const AddOrder = () => {
             onChange={handleChange}
             className="w-full border rounded p-2 mt-1"
             placeholder="نام سفارش را وارد کنید"
+            required
+          />
+        </div>
+
+        {/* Customer Name Field */}
+        <div>
+          <label className="block text-lg font-medium">نام مشتری:</label>
+          <input
+            type="text"
+            name="customerName"
+            value={formData.customerName}
+            onChange={handleChange}
+            className="w-full border rounded p-2 mt-1"
+            placeholder="نام مشتری را وارد کنید"
             required
           />
         </div>
