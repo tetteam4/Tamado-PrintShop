@@ -39,8 +39,7 @@ class Reception(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.0)
 
     order = models.ForeignKey(
-        Order,
-        on_delete=models.CASCADE,
+        Order, on_delete=models.CASCADE, related_name="reception_order"
     )
     description = models.TextField(_("Description "))
 
