@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
 
-const Orders = () => {
+const AddOrder = () => {
   const [orders, setOrders] = useState([]);
 
+  // Retrieve the designer name from local storage on component mount
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/category/api/orders/"
-        );
-        console.log(response);
-        // Update URL as needed
-        setOrders(response.data);
-      } catch (error) {
-        console.error("There was an error fetching the orders!", error);
-      }
-    };
-
-    fetchOrders();
+    const storedDesigner = localStorage.getItem('designerName');
+    if (storedDesigner) {
+      setFormData(prevState => ({ ...prevState, designer: storedDesigner }));
+    }
   }, []);
+
+  // Handle changes to form inputs
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Order details:', formData);
+    // Add form submission logic here (e.g., send data to the backend or update state)
+  };
 
   return (
     <div className="p-4">
@@ -64,4 +67,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default AddOrder;
