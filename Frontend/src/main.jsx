@@ -8,6 +8,6 @@ import Dashboard from './Components/dashboard/dashboard.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <App /> */}
-    <Dashboard role='Admin'/>
+    <Dashboard role='Designer'/>
   </StrictMode>,
 )
