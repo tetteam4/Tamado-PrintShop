@@ -11,7 +11,7 @@ const services = [
     id: 1,
     title: "طراحی گرافیک",
     description: "ما بهترین طراحی های گرافیکی را به شما ارائه می دهیم.",
-    image: null // Replace with actual image URLs
+    image: null, // Replace with actual image URLs
   },
   {
     id: 2,
