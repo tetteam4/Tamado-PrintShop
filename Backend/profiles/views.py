@@ -64,10 +64,3 @@ class UpdateProfileAPIView(APIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-from django.conf import settings
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-new_user = User.objects.get(username='admin', email='admin@gmail.com')
-print(f"User ID: {new_user.id}")
