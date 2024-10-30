@@ -35,6 +35,7 @@ class Reception(models.Model):
         on_delete=models.CASCADE,
     )
     description = models.TextField(_("Description "))
+    customer_name = models.TextField(_("Description "))
     price = models.DecimalField(max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
