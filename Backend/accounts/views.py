@@ -1,15 +1,27 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-import secrets
-import django
 from django.contrib.auth import get_user_model
-from django.conf import settings
+from rest_framework import generics, permissions
 
-# Generate a secure random signing key
-signing_key = secrets.token_hex(32)  # 64-character hex string
-print(signing_key)
+from .serializers import CreateUserSerializer, UserSerializer
 
-new_user = settings.AUTH_USER_MODEL.objects.create(username='admin', email='admin@gmail.com')
-print(f"User ID: {new_user.id}")
+User = get_user_model()
+
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]  #
+
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = CreateUserSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]  #
+
+    def get_object(self):
+        return super().get_object()
