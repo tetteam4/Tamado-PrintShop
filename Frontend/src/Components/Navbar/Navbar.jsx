@@ -47,11 +47,11 @@ function Navbar() {
 
   return (
     <nav className="bg-gray-800 dark:bg-slate-900">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="md:container mx-auto flex justify-between items-center">
         {/* Logo Section */}
-        <div className="text-white text-xl font-bold">
+        <div className="text-white text-md md:text-xl font-bold">
           <a href="#" className="flex items-center gap-2">
-            <img src={logo} alt="logo" className="w-[70px]" />
+            <img src={logo} alt="logo" className=" w-[50px] md:w-[70px]" />
             <span className="text-yellow-300 tracking-wider">مطبعه تمدن</span>
           </a>
         </div>
@@ -63,7 +63,7 @@ function Navbar() {
               <li
                 onClick={() => activeHandler(index)}
                 key={index}
-                className={`relative group cursor-pointer text-lg font-medium ${
+                className={`relative group cursor-pointer text-md font-medium ${
                   active === index
                     ? "text-yellow-300" // Active link color
                     : "text-gray-300 dark:text-gray-400"
@@ -75,7 +75,7 @@ function Navbar() {
                 >
                   {item.title}
                   <span
-                    className={`absolute right-0 -bottom-1 w-0 h-0.5 bg-yellow-300 transition-all duration-300 group-hover:w-full ${
+                    className={`absolute right-0 -bottom-2 w-0 h-0.5 bg-yellow-300 transition-all duration-300 group-hover:w-full ${
                       active === index ? "w-full" : "w-0"
                     }`}
                   ></span>
@@ -86,7 +86,7 @@ function Navbar() {
         </div>
 
         {/* Search Input and Dark Mode Toggle */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
           <div
             className="flex items-center cursor-pointer transition-all gap-2 duration-300"
             onClick={() => setDarkmode(!darkmode)}
@@ -103,7 +103,7 @@ function Navbar() {
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden text-white">
+        <div className="md:hidden text-white px-5 ">
           <button>
             <FaBars className="text-2xl text-yellow-500" />{" "}
             {/* Mobile menu icon color */}

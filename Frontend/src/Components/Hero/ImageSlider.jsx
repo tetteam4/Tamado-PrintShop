@@ -35,7 +35,7 @@ const ImageSlider = () => {
 
   return (
     <div>
-      <div className="relative w-full ">
+      <div className="relative w-full transition-all duration-300 ">
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
@@ -43,13 +43,13 @@ const ImageSlider = () => {
         />
         <button
           onClick={prevImage}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2"
+          className="absolute top-1/2 left-8 transform -translate-y-1/2 text-white text-2xl bg-opacity-50 rounded-full p-2"
         >
           &#10094;
         </button>
         <button
           onClick={nextImage}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2"
+          className="absolute top-1/2 right-8 transform -translate-y-1/2 text-white text-2xl bg-opacity-50 rounded-full p-2"
         >
           &#10095;
         </button>

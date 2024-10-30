@@ -147,13 +147,13 @@ const UserManagement = () => {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">نام کاربری</th>
-            <th className="py-2 px-4 border-b">نام</th>
-            <th className="py-2 px-4 border-b">تخلص</th>
-            <th className="py-2 px-4 border-b">ایمیل</th>
-            <th className="py-2 px-4 border-b">شماره تماس</th>
-            <th className="py-2 px-4 border-b">عکس</th>
-            <th className="py-2 px-4 border-b">عملیات</th>
+            <th className="py-2 px-4 border">نام کاربری</th>
+            <th className="py-2 px-4 border">نام</th>
+            <th className="py-2 px-4 border">تخلص</th>
+            <th className="py-2 px-4 border">ایمیل</th>
+            <th className="py-2 px-4 border">شماره تماس</th>
+            <th className="py-2 px-4 border">عکس</th>
+            <th className="py-2 px-4 border">عملیات</th>
           </tr>
         </thead>
         <tbody>
