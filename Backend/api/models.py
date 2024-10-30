@@ -32,7 +32,9 @@ class Reception(models.Model):
     designer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     customer_name = models.CharField(_("Customer Name :"), max_length=255)
-    order_name = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order_name = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="receptions"
+    )
     description = models.TextField()
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.0)
 
