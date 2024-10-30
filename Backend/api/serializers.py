@@ -43,7 +43,12 @@ class OrderSerializer(serializers.ModelSerializer):
 
 class ReceptionSerializer(serializers.ModelSerializer):
     order = OrderSerializer()
+<<<<<<< HEAD
     "designer",  
+=======
+    "designer",
+
+>>>>>>> 3088b194546cdea7b93e972f49b434ac96092a6d
     class Meta:
         model = Reception
         fields = [
