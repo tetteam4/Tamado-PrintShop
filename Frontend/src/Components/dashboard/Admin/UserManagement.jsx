@@ -31,7 +31,9 @@ const UserManagement = () => {
   const handleAddUser = (e) => {
     e.preventDefault();
     const newUserWithId = { ...newUser, id: Date.now() };
-    setUsers((prevUsers) => [...prevUsers, newUserWithId]);
+    const response =axios.get('http//8000:account/api/auth/users')
+console.log((response))
+     setUsers((prevUsers) => [...prevUsers, newUserWithId]);
 
     // Clear the form
     setNewUser({
@@ -126,11 +128,11 @@ const UserManagement = () => {
               required
             />
             <input
-              type="text"
+              type="file"
               name="photo"
               value={newUser.photo}
               onChange={handleInputChange}
-              placeholder="لینک عکس"
+              placeholder=" عکس"
               className="p-2 border border-gray-300 rounded"
             />
           </div>

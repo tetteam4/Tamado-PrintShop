@@ -10,7 +10,7 @@ const blogItem = [
     date: "2024-10-01",
     discription:
       "Web development trends in 2024 are changing rapidly, with a focus on modern frameworks like React and the rise of Tailwind CSS. In this article, we explore the future of web development.",
-    image: topimage1,
+    image: null,
   },
 
   {
@@ -19,7 +19,7 @@ const blogItem = [
     date: "2024-09-25",
     discription:
       "Tailwind CSS is gaining popularity for its utility-first approach. This guide will walk you through the basics and show you how to get started with Tailwind.",
-    image: topimage2,
+    image: null,
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const blogItem = [
     date: "2024-10-01",
     discription:
       "Web development trends in 2024 are changing rapidly, with a focus on modern frameworks like React and the rise of Tailwind CSS. In this article, we explore the future of web development.",
-    image: topimage1,
+    image: null,
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const blogItem = [
     date: "2024-09-25",
     discription:
       "Tailwind CSS is gaining popularity for its utility-first approach. This guide will walk you through the basics and show you how to get started with Tailwind.",
-    image: topimage2,
+    image: null,
   },
 ];
 
