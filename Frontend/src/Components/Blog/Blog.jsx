@@ -1,6 +1,6 @@
 import React from "react";
-import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
-import topimage2 from "../../assets/Hero_Image/imagetop2.jpg";
+// import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
+// import topimage2 from "../../assets/Hero_Image/imagetop2.jpg";
 import BlogCard from "./BlogCard";
 
 const blogItem = [
