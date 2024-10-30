@@ -9,7 +9,7 @@ import {
 
 function Footer() {
   return (
-    <footer className="bg-slate-800 text-gray-200 py-5 ">
+    <footer id="about" className="bg-slate-800 text-gray-200 py-5 ">
       <div className="container px-5 md:px-0 flex gap-6 items-center mx-auto">
         <img src={logo} className="w-[70px]" alt="" />
         <span className="text-3xl font-bold text-yellow-300 tracking-wider">
@@ -94,7 +94,8 @@ function Footer() {
         </div>
       </div>
       <div className="text-center text-gray-400  px-4">
-        <p>
+        <hr className="max-w-[50%] mx-auto" />
+        <p className="pt-4">
           &copy; {new Date().getFullYear()} مطبعه تمدن. تمامی حقوق محفوظ است.
         </p>
       </div>
