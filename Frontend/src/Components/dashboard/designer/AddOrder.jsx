@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
+<<<<<<< HEAD
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+=======
 const AddOrder = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,29 +13,66 @@ const AddOrder = () => {
     category: '',
     designer: ''
   });
+>>>>>>> bcb78ad23ff7f170251ad3db11cf02ed32221b4e
 
-  // Retrieve the designer name from local storage on component mount
   useEffect(() => {
-    const storedDesigner = localStorage.getItem('designerName');
-    if (storedDesigner) {
-      setFormData(prevState => ({ ...prevState, designer: storedDesigner }));
-    }
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/category/api/orders/"
+        );
+        console.log(response);
+        // Update URL as needed
+        setOrders(response.data);
+      } catch (error) {
+        console.error("There was an error fetching the orders!", error);
+      }
+    };
+
+    fetchOrders();
   }, []);
 
-  // Handle changes to form inputs
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Order details:', formData);
-    // Add form submission logic here (e.g., send data to the backend or update state)
-  };
-
   return (
+<<<<<<< HEAD
+    <div className="p-4">
+      <h2 className="text-2xl font-bold mb-4">سفارشات</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-300">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border font-medium text-left">شناسه</th>
+              <th className="py-2 px-4 border font-medium text-left">
+                نام سفارش
+              </th>
+              <th className="py-2 px-4 border font-medium text-left">
+                توضیحات
+              </th>
+              <th className="py-2 px-4 border font-medium text-left">
+                دسته‌بندی
+              </th>
+              <th className="py-2 px-4 border font-medium text-left">کاربر</th>
+              <th className="py-2 px-4 border font-medium text-left">
+                زمان ایجاد
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.id} className="hover:bg-gray-100 ">
+                <td className="py-2 px-4 border">{order.id}</td>
+                <td className="py-2 px-4 border">{order.Customer_name}</td>
+                <td className="py-2 px-4 border">{order.description}</td>
+                <td className="py-2 px-4 border">
+                  {order.category.map((cat) => cat.name).join(", ")}
+                </td>
+                <td className="py-2 px-4 border">{order.user}</td>
+                <td className="py-2 px-4 border">{order.created_at}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+=======
     <div>
       <h2 className="text-3xl font-bold mb-4">افزودن سفارش</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -118,8 +160,9 @@ const AddOrder = () => {
           ثبت سفارش
         </button>
       </form>
+>>>>>>> bcb78ad23ff7f170251ad3db11cf02ed32221b4e
     </div>
   );
 };
 
-export default AddOrder;
+export default Orders;
