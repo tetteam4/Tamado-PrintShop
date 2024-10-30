@@ -20,7 +20,7 @@ function Footer() {
         {/* Quick Links */}
         <div>
           <h3 className="text-lg font-bold mb-4">لینک های سریع</h3>
-          <ul>
+          <ul className="grid grid-cols-2  gap-5 md:block">
             <li className="mb-1">
               <a href="#home" className="hover:text-yellow-400">
                 صفحه اصلی
@@ -96,7 +96,7 @@ function Footer() {
       <div className="text-center text-gray-400  px-4">
         <hr className="max-w-[50%] mx-auto" />
         <p className="pt-4">
-          &copy; {new Date().getFullYear()} مطبعه تمدن. تمامی حقوق محفوظ است.
+          &copy; {new Date().getFullYear()} TET TEAM. تمامی حقوق محفوظ است.
         </p>
       </div>
     </footer>
