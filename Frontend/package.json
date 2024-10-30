@@ -13,7 +13,11 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.5",
+<<<<<<< HEAD
     "axios": "^1.7.7",
+=======
+    "framer-motion": "^11.11.10",
+>>>>>>> cdfd7964ae8975eb0d9fd340f1465a2b60a63aaa
     "i": "^0.3.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
