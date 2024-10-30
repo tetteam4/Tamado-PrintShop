@@ -1,10 +1,7 @@
-from ast import mod
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
-
-import datetime
 
 
 class Category(models.Model):
@@ -26,5 +23,4 @@ class Order(models.Model):
     category = models.ManyToManyField(Category)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    
     
