@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:Frontend/src/Components/Services/servicesdata.jsx
 import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
 import topimage2 from "../../assets/Hero_Image/imagetop2.jpg";
@@ -5,6 +6,9 @@ import topimage3 from "../../assets/Hero_Image/imagetop3.jpg";
 import topimage4 from "../../assets/Hero_Image/imagetop4.jpg";
 import topimage5 from "../../assets/Hero_Image/imagetop5.jpg";
 =======
+=======
+
+>>>>>>> ed62f4ab1b877d30681e82f2b118be40b130eaf0
 import React from "react";
 import ServicesCard from "./ServicesCard";
 // import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
@@ -12,7 +16,10 @@ import ServicesCard from "./ServicesCard";
 // import topimage3 from "../../assets/Hero_Image/imagetop3.jpg";
 // import topimage4 from "../../assets/Hero_Image/imagetop4.jpg";
 // import topimage5 from "../../assets/Hero_Image/imagetop5.jpg";
+<<<<<<< HEAD
 >>>>>>> 410950b7bfe2cb69216424f8fa9bd15aa3e7a185:Frontend/src/Components/Services/Services.jsx
+=======
+>>>>>>> ed62f4ab1b877d30681e82f2b118be40b130eaf0
 
 export const services = [
   {

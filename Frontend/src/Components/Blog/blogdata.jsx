@@ -1,15 +1,6 @@
-<<<<<<< HEAD:Frontend/src/Components/Blog/blogdata.jsx
 import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
 import topimage2 from "../../assets/Hero_Image/imagetop2.jpg";
 export const blogItem = [
-=======
-import React from "react";
-// import topimage1 from "../../assets/Hero_Image/imagetop1.jpg";
-// import topimage2 from "../../assets/Hero_Image/imagetop2.jpg";
-import BlogCard from "./BlogCard";
-
-const blogItem = [
->>>>>>> 410950b7bfe2cb69216424f8fa9bd15aa3e7a185:Frontend/src/Components/Blog/Blog.jsx
   {
     id: 1,
     title: "رشد چاپخانه‌ها در سال 2024",
