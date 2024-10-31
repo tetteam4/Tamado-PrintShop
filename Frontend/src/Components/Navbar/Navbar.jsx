@@ -16,7 +16,7 @@ const navItems = [
   {
     id: 2,
     title: "خدمات",
-    path: "/",
+    path: "/service",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const navItems = [
   {
     id: 4,
     title: "درباره ما",
-    path: "#about",
+    path: "/about",
   },
 ];
 
@@ -56,10 +56,10 @@ function Navbar() {
         <div className="md:container mx-auto flex justify-between items-center">
           {/* Logo Section */}
           <div className="text-white text-md md:text-xl font-bold">
-            <a href="#" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <img src={logo} alt="logo" className=" w-[50px] md:w-[70px]" />
               <span className="text-yellow-300 tracking-wider">مطبعه تمدن</span>
-            </a>
+            </Link>
           </div>
 
           {/* Navigation Links */}
@@ -75,8 +75,8 @@ function Navbar() {
                       : "text-gray-300 dark:text-gray-400"
                   }`}
                 >
-                  <a
-                    href={item.path}
+                  <Link
+                    to={item.path}
                     className="hover:text-yellow-300 transition-colors duration-300"
                   >
                     {item.title}
@@ -85,7 +85,7 @@ function Navbar() {
                         active === index ? "w-full" : "w-0"
                       }`}
                     ></span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
