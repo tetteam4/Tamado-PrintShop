@@ -1,7 +1,10 @@
+from ast import mod
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from pyexpat import model
 
 
 class Category(models.Model):
@@ -36,6 +39,7 @@ class Reception(models.Model):
     order_name = models.CharField(_("Order Name "), max_length=255)
     description = models.TextField(_("Description"))
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.0)
+    category = models.ManyToManyField(Category)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 

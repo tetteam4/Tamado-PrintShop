@@ -1,5 +1,5 @@
 from accounts.models import Profile, User
-from api.models import Order, Reception
+from api.models import Category, Order, Reception
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -58,6 +58,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+class CategorySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["name"]
+
+
 class UserLogin(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -71,24 +77,45 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class ReceptionSerializer(serializers.ModelSerializer):
+    category = CategorySerializers(
+        many=True
+    )  # Use the CategorySerializer for the ManyToMany field
+
     class Meta:
         model = Reception
         fields = [
-            "id",  # Include if you want to expose the primary key
-            "designer",  # ForeignKey to User
+            "id",
+            "designer",
             "customer_name",
             "order_name",
             "description",
             "price",
+            "category",  # Include the ManyToMany field
             "created_at",
             "updated_at",
         ]
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation["designer"] = {
-            "id": instance.designer.id,
-            "first_name": instance.designer.first_name,
-            "last_name": instance.designer.last_name,
-        }
-        return representation
+    def create(self, validated_data):
+        category_data = validated_data.pop("category")  # Extract category data
+        reception = Reception.objects.create(
+            **validated_data
+        )  # Create Reception instance
+        reception.category.set(category_data)  # Set the ManyToMany relationships
+        return reception
+
+    def update(self, instance, validated_data):
+        category_data = validated_data.pop(
+            "category", None
+        )  # Extract category data if provided
+        if category_data is not None:
+            instance.category.set(category_data)  # Update ManyToMany relationships
+
+        instance.designer = validated_data.get("designer", instance.designer)
+        instance.customer_name = validated_data.get(
+            "customer_name", instance.customer_name
+        )
+        instance.order_name = validated_data.get("order_name", instance.order_name)
+        instance.description = validated_data.get("description", instance.description)
+        instance.price = validated_data.get("price", instance.price)
+        instance.save()
+        return instance
