@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
+const OrderTable = () => {
+  // Initial state with mock data
+  const [orders, setOrders] = useState([
+    {
+      id: 1,
+      customerName: 'Ali',
+      orderName: 'Order1',
+      description: 'First order description',
+      category: 'Book',
+    },
+  ]);
 
+  // Fetch data from database (simulated here with useEffect)
   useEffect(() => {
+    // Replace this with an actual API call
     const fetchOrders = async () => {
       try {
-        // Update URL as needed
-        setOrders(response.data);
+        const response = await fetch('/api/orders'); // Adjust API endpoint as needed
+        const data = await response.json();
+        setOrders(data);
       } catch (error) {
-        console.error("There was an error fetching the orders!", error);
+        console.error('Error fetching orders:', error);
       }
     };
 
@@ -17,48 +29,30 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">سفارشات</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border font-medium text-left">شناسه</th>
-              <th className="py-2 px-4 border font-medium text-left">
-                نام سفارش
-              </th>
-              <th className="py-2 px-4 border font-medium text-left">
-                توضیحات
-              </th>
-              <th className="py-2 px-4 border font-medium text-left">
-                دسته‌بندی
-              </th>
-              <th className="py-2 px-4 border font-medium text-left">کاربر</th>
-              <th className="py-2 px-4 border font-medium text-left">
-                زمان ایجاد
-              </th>
+    <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">جدول سفارشات</h2>
+      <table className="min-w-full bg-white border">
+        <thead>
+          <tr>
+            <th className="py-2 border px-4">نام مشتری</th>
+            <th className="py-2 border px-4">نام سفارش</th>
+            <th className="py-2 border px-4">توضیحات</th>
+            <th className="py-2 border px-4">دسته‌بندی</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td className="py-2 border px-4">{order.customerName}</td>
+              <td className="py-2 border px-4">{order.orderName}</td>
+              <td className="py-2 border px-4">{order.description}</td>
+              <td className="py-2 border px-4">{order.category}</td>
             </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-100 ">
-                <td className="py-2 px-4 border">{order.id}</td>
-                <td className="py-2 px-4 border">{order.Customer_name}</td>
-                <td className="py-2 px-4 border">{order.description}</td>
-                <td className="py-2 px-4 border">
-                  {order.category.map((cat) => cat.name).join(", ")}
-                </td>
-                <td className="py-2 px-4 border">{order.user}</td>
-                <td className="py-2 px-4 border">{order.created_at}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default Orders;
-
-
+export default OrderTable;

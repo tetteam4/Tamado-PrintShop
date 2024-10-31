@@ -4,8 +4,8 @@ import { MdDashboard } from 'react-icons/md';
 import DashboardHome from './designer/Ddashboard';
 import Orders from './designer/Orders';
 import AddOrder from './designer/AddOrder';
-import UserManagement from './Admin/UserManagement';
-
+import UserManagement from './Admin/UserManagement'; // Example Reception component
+import OrderList from './Reception/ordersList';
 const Dashboard = ({ role, userImage }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeComponent, setActiveComponent] = useState('DashboardHome');
@@ -14,17 +14,23 @@ const Dashboard = ({ role, userImage }) => {
   const handleToggle = () => setDarkMode(!darkMode);
   const handleSidebarToggle = () => setIsSidebarExpanded(!isSidebarExpanded);
 
+  // Define access control for each role
   const access = {
     Designer: ['Dashboard', 'Orders', 'Add Order'],
     Admin: ['Dashboard', 'User Management', 'Reports'],
+    Reception: ['Dashboard', 'OrderList'], // Add access for Reception
+    Printer: ['Dashboard', 'Printer Queue'], // Add access for Printer
   };
 
   const menuItems = {
+    'OrderList': { component: 'OrderList', icon: <FaClipboardList />, label: 'لیست سفارشات' },
     'Add Order': { component: 'AddOrder', icon: <FaPlusCircle />, label: 'افزودن سفارش' },
     Orders: { component: 'Orders', icon: <FaClipboardList />, label: 'سفارشات' },
     Dashboard: { component: 'DashboardHome', icon: <MdDashboard />, label: 'داشبورد' },
     'User Management': { component: 'UserManagement', icon: <FaUsers />, label: 'مدیریت کاربران' },
     Reports: { component: 'Reports', icon: <FaChartBar />, label: 'گزارشات' },
+    'Reception Orders': { component: 'ReceptionOrders', icon: <FaClipboardList />, label: 'سفارشات پذیرش' }, // Reception-specific
+    'Printer Queue': { component: 'PrinterQueue', icon: <FaClipboardList />, label: 'صف چاپ' }, // Printer-specific
   };
 
   const filteredMenuItems = Object.keys(menuItems).filter(item => access[role].includes(item));
@@ -41,6 +47,12 @@ const Dashboard = ({ role, userImage }) => {
         return <UserManagement />;
       case 'Reports':
         return <Reports />;
+      case 'ReceptionOrders':
+          return <ReceptionOrders />;
+      case 'OrderList':
+          return <OrderList />;
+      case 'PrinterQueue':
+        return <PrinterQueue />;
       default:
         return <DashboardHome />;
     }
