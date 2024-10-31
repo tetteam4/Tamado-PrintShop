@@ -118,16 +118,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
-<<<<<<< HEAD
       <ResNavbar open={open} active={active} navItems={navItems} activeHandler={activeHandler}  />
-=======
-      <ResNavbar
-        open={open}
-        active={active}
-        navItems={navItems}
-        activeHandler={activeHandler}
-      />
->>>>>>> da7b83fad6bc7911e5a8ebb119742e46fa80cca3
     </>
   );
 }
