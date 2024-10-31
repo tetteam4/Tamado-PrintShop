@@ -12,7 +12,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
           </Route>
-            <Route path="/dashboard" element={<Dashboard role='Reception' />} />
+            <Route path="/dashboard" element={<Dashboard role='Admin' />} />
         </Routes>
       </BrowserRouter>
     </>

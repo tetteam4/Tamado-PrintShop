@@ -32,11 +32,13 @@ const UserManagement = () => {
     phone: "",
     photo: "",
   });
-
+  const [reenteredPassword, setReenteredPassword] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [error, setError] = useState("");
 
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
+    setError(""); // Reset any existing error message
   };
 
   const handleInputChange = (e) => {
@@ -44,13 +46,20 @@ const UserManagement = () => {
     setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
+  const handleReenterPasswordChange = (e) => {
+    setReenteredPassword(e.target.value);
+  };
+
   const handleAddUser = (e) => {
     e.preventDefault();
-    http
+
+    if (newUser.password !== reenteredPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     const newUserWithId = { ...newUser, id: Date.now() };
-    const response =axios.get('http//8000:account/api/auth/users')
-console.log((response))
-     setUsers((prevUsers) => [...prevUsers, newUserWithId]);
+    setUsers((prevUsers) => [...prevUsers, newUserWithId]);
 
     // Clear the form
     setNewUser({
@@ -62,7 +71,9 @@ console.log((response))
       phone: "",
       photo: "",
     });
+    setReenteredPassword("");
     setIsFormVisible(false); // Hide the form after submission
+    setError(""); // Clear error message after successful submission
   };
 
   const handleEdit = (userId) => {
@@ -92,6 +103,7 @@ console.log((response))
           className="mb-6 p-4 border border-gray-300 rounded bg-gray-50"
         >
           <h3 className="text-xl font-semibold mb-4">ثبت کاربر جدید</h3>
+          {error && <p className="text-red-600 mb-4">{error}</p>}
           <div className="grid grid-cols-2 gap-4">
             <input
               type="text"
@@ -139,6 +151,14 @@ console.log((response))
               required
             />
             <input
+              type="password"
+              value={reenteredPassword}
+              onChange={handleReenterPasswordChange}
+              placeholder="تایید گذرواژه"
+              className="p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
               type="text"
               name="phone"
               value={newUser.phone}
@@ -152,7 +172,7 @@ console.log((response))
               name="photo"
               value={newUser.photo}
               onChange={handleInputChange}
-              placeholder=" عکس"
+              placeholder="عکس"
               className="p-2 border border-gray-300 rounded"
             />
           </div>
