@@ -31,6 +31,7 @@ const Home = () => {
         </div>
         <WhyChooseUs />
         <BlogHomeCard />
+        <BlogHomeCard />
         <About />
       </div>
     </div>
