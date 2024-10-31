@@ -3,12 +3,10 @@ import React from "react";
 import BlogCard from "../Components/Blog/BlogCard";
 import { blogItem } from "../Components/Blog/blogdata";
 
-
-
 const Blog = () => {
   return (
     <div>
-      <section id="blog" className=" bg-gray-100 dark:bg-slate-800 py-5">
+      <section className=" bg-gray-100 dark:bg-slate-800 py-5">
         <div className="container mx-auto px-4">
           <div class="md:flex justify-between gap-6 p-4 ">
             <div class=" ">
