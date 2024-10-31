@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
-import { FaSun, FaMoon, FaPlusCircle, FaBars, FaUsers, FaClipboardList, FaChartBar } from 'react-icons/fa';
+import { useNavigate  } from 'react-router-dom';
+import { FaSun, FaMoon, FaPlusCircle, FaBars, FaUsers, FaClipboardList, FaChartBar, FaSignOutAlt } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 import DashboardHome from './designer/Ddashboard';
 import Orders from './designer/Orders';
 import AddOrder from './designer/AddOrder';
-import UserManagement from './Admin/UserManagement'; // Example Reception component
+import UserManagement from './Admin/UserManagement';
 import OrderList from './Reception/ordersList';
+
 const Dashboard = ({ role, userImage }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeComponent, setActiveComponent] = useState('DashboardHome');
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const navigate = useNavigate();
 
   const handleToggle = () => setDarkMode(!darkMode);
   const handleSidebarToggle = () => setIsSidebarExpanded(!isSidebarExpanded);
 
-  // Define access control for each role
+  const handleLogout = () => {
+    // Clear any authentication tokens or session data here if needed
+    navigate('/');
+  };
+
   const access = {
-    Designer: ['Dashboard', 'Orders', 'Add Order'],
-    Admin: ['Dashboard', 'User Management', 'Reports'],
-    Reception: ['Dashboard', 'OrderList'], // Add access for Reception
-    Printer: ['Dashboard', 'Printer Queue'], // Add access for Printer
+    Designer: ['Dashboard', 'Orders', 'Add Order', 'Logout'],
+    Admin: ['Dashboard', 'User Management', 'Reports', 'Logout'],
+    Reception: ['Dashboard', 'OrderList', 'Logout'],
+    Printer: ['Dashboard', 'Printer Queue', 'Logout'],
   };
 
   const menuItems = {
@@ -29,8 +36,9 @@ const Dashboard = ({ role, userImage }) => {
     Dashboard: { component: 'DashboardHome', icon: <MdDashboard />, label: 'داشبورد' },
     'User Management': { component: 'UserManagement', icon: <FaUsers />, label: 'مدیریت کاربران' },
     Reports: { component: 'Reports', icon: <FaChartBar />, label: 'گزارشات' },
-    'Reception Orders': { component: 'ReceptionOrders', icon: <FaClipboardList />, label: 'سفارشات پذیرش' }, // Reception-specific
-    'Printer Queue': { component: 'PrinterQueue', icon: <FaClipboardList />, label: 'صف چاپ' }, // Printer-specific
+    'Reception Orders': { component: 'ReceptionOrders', icon: <FaClipboardList />, label: 'سفارشات پذیرش' },
+    'Printer Queue': { component: 'PrinterQueue', icon: <FaClipboardList />, label: 'صف چاپ' },
+    Logout: { component: 'Logout', icon: <FaSignOutAlt />, label: 'خروج' },
   };
 
   const filteredMenuItems = Object.keys(menuItems).filter(item => access[role].includes(item));
@@ -48,11 +56,12 @@ const Dashboard = ({ role, userImage }) => {
       case 'Reports':
         return <Reports />;
       case 'ReceptionOrders':
-          return <ReceptionOrders />;
-      case 'OrderList':
-          return <OrderList />;
+        return <OrderList />;
       case 'PrinterQueue':
         return <PrinterQueue />;
+      case 'Logout':
+        handleLogout();
+        return null;
       default:
         return <DashboardHome />;
     }
@@ -60,7 +69,6 @@ const Dashboard = ({ role, userImage }) => {
 
   return (
     <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen flex`}>
-      {/* Sidebar */}
       <aside className={`${isSidebarExpanded ? 'w-64' : 'w-20'} bg-blue-600 text-white p-6 space-y-6 relative transition-width duration-300`}>
         <button onClick={handleSidebarToggle} className="absolute top-4 right-4 text-2xl focus:outline-none">
           <FaBars />
@@ -86,7 +94,6 @@ const Dashboard = ({ role, userImage }) => {
         </ul>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1">
         <nav className="flex justify-between items-center p-4 shadow-md bg-white">
           <button onClick={handleToggle} className="text-2xl">
