@@ -1,4 +1,5 @@
 from accounts.models import Profile, User
+from api.models import Order, Reception
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -61,3 +62,33 @@ class UserLogin(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["full_name", "email"]
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ["id", "Customer_name", "order_name"]
+
+
+class ReceptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reception
+        fields = [
+            "id",  # Include if you want to expose the primary key
+            "designer",  # ForeignKey to User
+            "customer_name",
+            "order_name",
+            "description",
+            "price",
+            "created_at",
+            "updated_at",
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["designer"] = {
+            "id": instance.designer.id,
+            "first_name": instance.designer.first_name,
+            "last_name": instance.designer.last_name,
+        }
+        return representation

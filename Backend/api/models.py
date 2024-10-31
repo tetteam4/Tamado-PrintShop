@@ -18,37 +18,26 @@ class Category(models.Model):
 
 
 class Order(models.Model):
-    User = get_user_model()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     Customer_name = models.CharField(_("Customer Name :"), max_length=255)
+    order_name = models.CharField(_("Order Name : "), max_length=255)
     description = models.TextField()
     category = models.ManyToManyField(Category)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self) -> str:
+        return self.Customer_name
+
 
 class Reception(models.Model):
     User = get_user_model()
     designer = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    customer_name = models.CharField(_("Customer Name :"), max_length=255)
-    order_name = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="receptions"
-    )
-    description = models.TextField()
+    customer_name = models.CharField(_("Customer Name"), max_length=255)
+    order_name = models.CharField(_("Order Name "), max_length=255)
+    description = models.TextField(_("Description"))
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.0)
-
-    order = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="reception_order"
-    )
-    description = models.TextField(_("Description "))
-
-    customer_name = models.TextField(_("Description "))
-
-    price = models.DecimalField(max_digits=12, decimal_places=2)
-
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.designer.first_name
+        return f"{self.customer_name} - {self.designer.first_name}"

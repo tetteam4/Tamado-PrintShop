@@ -9,6 +9,9 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .models import Reception
+from .serializers import ReceptionSerializer
+
 
 def generate_random_opt_code(length=6):
     otp = "".join([str(random.randint(0, 9)) for _ in range(length)])
@@ -68,3 +71,13 @@ class PasswordChangeApiView(generics.CreateAPIView):
             return Response(
                 {"messages": "User Does not exists!"}, status=status.HTTP_404_NOT_FOUND
             )
+
+
+class ReceptionListCreateView(generics.ListCreateAPIView):
+    queryset = Reception.objects.all()
+    serializer_class = ReceptionSerializer
+
+
+class ReceptionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Reception.objects.all()
+    serializer_class = ReceptionSerializer
