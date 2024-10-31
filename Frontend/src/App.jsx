@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Blog from "./Pages/Blog";
 import About from "./Pages/About";
 import Services from "./Pages/Services";
+import Dashboard from "./Components/dashboard/dashboard";
 function App() {
   return (
     <>
@@ -14,9 +15,8 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/service" element={<Services />} />
-            <Route path="/dashboard" element={<Dashboard role='Reception' />} />
-         </Route>
-            <Route path="/dashboard" element={<Dashboard role='Reception' />} />
+            </Route>
+            <Route path="/dashboard" element={<Dashboard role='Admin' />} />
         </Routes>
       </BrowserRouter>
     </>

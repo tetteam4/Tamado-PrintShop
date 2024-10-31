@@ -29,6 +29,7 @@ const UserManagement = () => {
     lastName: "",
     email: "",
     password: "",
+    confirmPassword: "",
     phone: "",
     photo: "",
   });
@@ -46,11 +47,15 @@ const UserManagement = () => {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    http
+
+    if (newUser.password !== newUser.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
     const newUserWithId = { ...newUser, id: Date.now() };
-    const response =axios.get('http//8000:account/api/auth/users')
-console.log((response))
-     setUsers((prevUsers) => [...prevUsers, newUserWithId]);
+
+    setUsers((prevUsers) => [...prevUsers, newUserWithId]);
 
     // Clear the form
     setNewUser({
@@ -59,6 +64,7 @@ console.log((response))
       lastName: "",
       email: "",
       password: "",
+      confirmPassword: "",
       phone: "",
       photo: "",
     });
@@ -139,6 +145,15 @@ console.log((response))
               required
             />
             <input
+              type="password"
+              name="confirmPassword"
+              value={newUser.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="تأیید گذرواژه"
+              className="p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
               type="text"
               name="phone"
               value={newUser.phone}
@@ -150,7 +165,6 @@ console.log((response))
             <input
               type="file"
               name="photo"
-              value={newUser.photo}
               onChange={handleInputChange}
               placeholder=" عکس"
               className="p-2 border border-gray-300 rounded"
