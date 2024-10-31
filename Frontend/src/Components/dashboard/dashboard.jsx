@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaSun, FaMoon, FaPlusCircle, FaBars, FaUsers, FaClipboardList, FaChartBar, FaSignOutAlt } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 import DashboardHome from './designer/Ddashboard';
@@ -21,6 +21,13 @@ const Dashboard = ({ role, userImage }) => {
     // Clear any authentication tokens or session data here if needed
     navigate('/');
   };
+
+  // Logout effect to watch activeComponent
+  useEffect(() => {
+    if (activeComponent === 'Logout') {
+      handleLogout();
+    }
+  }, [activeComponent]);
 
   const access = {
     Designer: ['Dashboard', 'Orders', 'Add Order', 'Logout'],
@@ -47,10 +54,12 @@ const Dashboard = ({ role, userImage }) => {
     switch (activeComponent) {
       case 'DashboardHome':
         return <DashboardHome />;
-      case 'Orders':
-        return <Orders />;
       case 'AddOrder':
         return <AddOrder />;
+      case 'Orders':
+        return <Orders />;
+      case 'OrderList':
+        return <OrderList />;
       case 'UserManagement':
         return <UserManagement />;
       case 'Reports':
@@ -59,9 +68,6 @@ const Dashboard = ({ role, userImage }) => {
         return <OrderList />;
       case 'PrinterQueue':
         return <PrinterQueue />;
-      case 'Logout':
-        handleLogout();
-        return null;
       default:
         return <DashboardHome />;
     }
@@ -69,6 +75,7 @@ const Dashboard = ({ role, userImage }) => {
 
   return (
     <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen flex`}>
+      {/* Sidebar */}
       <aside className={`${isSidebarExpanded ? 'w-64' : 'w-20'} bg-blue-600 text-white p-6 space-y-6 relative transition-width duration-300`}>
         <button onClick={handleSidebarToggle} className="absolute top-4 right-4 text-2xl focus:outline-none">
           <FaBars />
@@ -94,6 +101,7 @@ const Dashboard = ({ role, userImage }) => {
         </ul>
       </aside>
 
+      {/* Main Content */}
       <div className="flex-1">
         <nav className="flex justify-between items-center p-4 shadow-md bg-white">
           <button onClick={handleToggle} className="text-2xl">
