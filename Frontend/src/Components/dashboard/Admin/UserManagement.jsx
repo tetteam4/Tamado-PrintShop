@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
-import { FaUserPlus } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([
-    { id: 1, username: 'user1', firstName: 'Ali', lastName: 'Ahmadi', email: 'ali@example.com', phone: '09123456789', photo: 'link_to_photo' },
-    { id: 2, username: 'user2', firstName: 'Sara', lastName: 'Mohammadi', email: 'sara@example.com', phone: '09123456788', photo: 'link_to_photo' },
+    {
+      id: 1,
+      username: "user1",
+      firstName: "Ali",
+      lastName: "Ahmadi",
+      email: "ali@example.com",
+      phone: "09123456789",
+      photo: "link_to_photo",
+    },
+    {
+      id: 2,
+      username: "user2",
+      firstName: "Sara",
+      lastName: "Mohammadi",
+      email: "sara@example.com",
+      phone: "09123456788",
+      photo: "link_to_photo",
+    },
   ]);
 
   const [newUser, setNewUser] = useState({
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phone: '',
-    photo: '',
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phone: "",
+    photo: "",
   });
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -30,6 +46,7 @@ const UserManagement = () => {
 
   const handleAddUser = (e) => {
     e.preventDefault();
+    http
     const newUserWithId = { ...newUser, id: Date.now() };
     const response =axios.get('http//8000:account/api/auth/users')
 console.log((response))
@@ -37,13 +54,13 @@ console.log((response))
 
     // Clear the form
     setNewUser({
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      phone: '',
-      photo: '',
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phone: "",
+      photo: "",
     });
     setIsFormVisible(false); // Hide the form after submission
   };
@@ -53,7 +70,7 @@ console.log((response))
   };
 
   const handleDelete = (userId) => {
-    setUsers(users.filter(user => user.id !== userId));
+    setUsers(users.filter((user) => user.id !== userId));
   };
 
   return (
@@ -70,7 +87,10 @@ console.log((response))
 
       {/* User Registration Form */}
       {isFormVisible && (
-        <form onSubmit={handleAddUser} className="mb-6 p-4 border border-gray-300 rounded bg-gray-50">
+        <form
+          onSubmit={handleAddUser}
+          className="mb-6 p-4 border border-gray-300 rounded bg-gray-50"
+        >
           <h3 className="text-xl font-semibold mb-4">ثبت کاربر جدید</h3>
           <div className="grid grid-cols-2 gap-4">
             <input
@@ -167,11 +187,27 @@ console.log((response))
               <td className="py-2 px-4 border-b">{user.email}</td>
               <td className="py-2 px-4 border-b">{user.phone}</td>
               <td className="py-2 px-4 border-b">
-                {user.photo && <img src={user.photo} alt="User" className="w-10 h-10 rounded-full" />}
+                {user.photo && (
+                  <img
+                    src={user.photo}
+                    alt="User"
+                    className="w-10 h-10 rounded-full"
+                  />
+                )}
               </td>
               <td className="py-2 px-4 border-b">
-                <button onClick={() => handleEdit(user.id)} className="text-blue-600 mr-2">ویرایش</button>
-                <button onClick={() => handleDelete(user.id)} className="text-red-600">حذف</button>
+                <button
+                  onClick={() => handleEdit(user.id)}
+                  className="text-blue-600 mr-2"
+                >
+                  ویرایش
+                </button>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className="text-red-600"
+                >
+                  حذف
+                </button>
               </td>
             </tr>
           ))}

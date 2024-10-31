@@ -8,6 +8,12 @@ import Dashboard from "./Components/dashboard/dashboard.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
+<<<<<<< HEAD
     <Dashboard role='Designer'/>
   </StrictMode>,
 )
+=======
+    {/* <Dashboard role="Desinger" /> */}
+  </StrictMode>
+);
+>>>>>>> da7b83fad6bc7911e5a8ebb119742e46fa80cca3
