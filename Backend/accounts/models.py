@@ -12,14 +12,15 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
+    # Adding related_name to avoid clashes with the built-in User model
     groups = models.ManyToManyField(
         Group,
-        related_name="custom_user_set",  # Unique related_name
+        related_name="custom_user_set",  # Change this to a unique name
         blank=True,
     )
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name="custom_user_permissions_set",  # Unique related_name
+        related_name="custom_user_permissions_set",  # Change this to a unique name
         blank=True,
     )
 
@@ -27,10 +28,10 @@ class User(AbstractUser):
         return self.username
 
     def save(self, *args, **kwargs):
-        email_username, _ = self.email.split("@")
-        if not self.first_name:
+        email_username, domain = self.email.split("@")
+        if not self.first_name or self.full_name is None:
             self.first_name = email_username
-        if not self.username:
+        if not self.username or self.username is None:
             self.username = email_username
         super(User, self).save(*args, **kwargs)
 
@@ -46,10 +47,7 @@ class Profile(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        if self.full_name:
-            return str(self.full_name)
-        else:
-            return str(self.user.full_name)
+        return self.full_name if self.full_name else str(self.user.full_name)
 
     def save(self, *args, **kwargs):
         if not self.full_name:

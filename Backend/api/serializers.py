@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["username", "full_name", "email"]
+        ref_name = "ApiUserSerializer"
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -59,4 +60,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserLogin(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["name", "email"]
+        fields = ["full_name", "email"]
