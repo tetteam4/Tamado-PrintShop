@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import {
   FaSun,
@@ -13,16 +14,34 @@ import DashboardHome from "./designer/Ddashboard";
 import Orders from "./designer/Orders";
 import AddOrder from "./designer/AddOrder";
 import UserManagement from "./Admin/UserManagement";
+=======
+import React, { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import { FaSun, FaMoon, FaPlusCircle, FaBars, FaUsers, FaClipboardList, FaChartBar, FaSignOutAlt } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import DashboardHome from './designer/Ddashboard';
+import Orders from './designer/Orders';
+import AddOrder from './designer/AddOrder';
+import UserManagement from './Admin/UserManagement';
+import OrderList from './Reception/ordersList';
+>>>>>>> 410950b7bfe2cb69216424f8fa9bd15aa3e7a185
 
 const Dashboard = ({ role, userImage }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeComponent, setActiveComponent] = useState("DashboardHome");
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const navigate = useNavigate();
 
   const handleToggle = () => setDarkMode(!darkMode);
   const handleSidebarToggle = () => setIsSidebarExpanded(!isSidebarExpanded);
 
+  const handleLogout = () => {
+    // Clear any authentication tokens or session data here if needed
+    navigate('/');
+  };
+
   const access = {
+<<<<<<< HEAD
     Designer: ["Dashboard", "Orders", "Add Order"],
     Admin: ["Dashboard", "User Management", "Reports"],
   };
@@ -49,6 +68,24 @@ const Dashboard = ({ role, userImage }) => {
       label: "مدیریت کاربران",
     },
     Reports: { component: "Reports", icon: <FaChartBar />, label: "گزارشات" },
+=======
+    Designer: ['Dashboard', 'Orders', 'Add Order', 'Logout'],
+    Admin: ['Dashboard', 'User Management', 'Reports', 'Logout'],
+    Reception: ['Dashboard', 'OrderList', 'Logout'],
+    Printer: ['Dashboard', 'Printer Queue', 'Logout'],
+  };
+
+  const menuItems = {
+    'OrderList': { component: 'OrderList', icon: <FaClipboardList />, label: 'لیست سفارشات' },
+    'Add Order': { component: 'AddOrder', icon: <FaPlusCircle />, label: 'افزودن سفارش' },
+    Orders: { component: 'Orders', icon: <FaClipboardList />, label: 'سفارشات' },
+    Dashboard: { component: 'DashboardHome', icon: <MdDashboard />, label: 'داشبورد' },
+    'User Management': { component: 'UserManagement', icon: <FaUsers />, label: 'مدیریت کاربران' },
+    Reports: { component: 'Reports', icon: <FaChartBar />, label: 'گزارشات' },
+    'Reception Orders': { component: 'ReceptionOrders', icon: <FaClipboardList />, label: 'سفارشات پذیرش' },
+    'Printer Queue': { component: 'PrinterQueue', icon: <FaClipboardList />, label: 'صف چاپ' },
+    Logout: { component: 'Logout', icon: <FaSignOutAlt />, label: 'خروج' },
+>>>>>>> 410950b7bfe2cb69216424f8fa9bd15aa3e7a185
   };
 
   const filteredMenuItems = Object.keys(menuItems).filter((item) =>
@@ -67,12 +104,20 @@ const Dashboard = ({ role, userImage }) => {
         return <UserManagement />;
       case "Reports":
         return <Reports />;
+      case 'ReceptionOrders':
+        return <OrderList />;
+      case 'PrinterQueue':
+        return <PrinterQueue />;
+      case 'Logout':
+        handleLogout();
+        return null;
       default:
         return <DashboardHome />;
     }
   };
 
   return (
+<<<<<<< HEAD
     <div
       className={`${
         darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
@@ -88,6 +133,11 @@ const Dashboard = ({ role, userImage }) => {
           onClick={handleSidebarToggle}
           className="absolute top-4 right-4 text-2xl focus:outline-none"
         >
+=======
+    <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen flex`}>
+      <aside className={`${isSidebarExpanded ? 'w-64' : 'w-20'} bg-blue-600 text-white p-6 space-y-6 relative transition-width duration-300`}>
+        <button onClick={handleSidebarToggle} className="absolute top-4 right-4 text-2xl focus:outline-none">
+>>>>>>> 410950b7bfe2cb69216424f8fa9bd15aa3e7a185
           <FaBars />
         </button>
         <div
@@ -117,7 +167,6 @@ const Dashboard = ({ role, userImage }) => {
         </ul>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1">
         <nav className="flex justify-between items-center p-4 shadow-md bg-white">
           <button onClick={handleToggle} className="text-2xl">
