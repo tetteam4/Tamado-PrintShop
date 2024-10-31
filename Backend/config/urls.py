@@ -28,15 +28,11 @@ urlpatterns = [
     path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("admin/", admin.site.urls),
-<<<<<<< HEAD
-    path("", include("api.urls")),
-=======
     path("profile/", include("profiles.urls")),
     path("category/", include("api.urls")),
     # path("api/auth/", include("djoser.urls")),
     path("api/auth/", include("djoser.urls.jwt")),
-    path("accounts/", include("accounts.urls")),
->>>>>>> 43546f57a6482ded8fc4ca7d91655fefaa395469
+    path("api/", include("api.urls")),
 ]
 admin.site.site_header = "Tamadon Admin"
 admin.site.site_title = "Tamando Admin Area."
