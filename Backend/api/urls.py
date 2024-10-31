@@ -1,26 +1,14 @@
-# urls.py
-<<<<<<< HEAD
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, OrderViewSet
-
-router = DefaultRouter()
-router.register('categories', CategoryViewSet)
-router.register('orders', OrderViewSet)
+from api import views as api_views
+from django.urls import path
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-=======
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
-
-from .views import CategoryViewSet, OrderViewSet
-
-router = DefaultRouter()
-router.register("categories", CategoryViewSet)
-router.register("orders", OrderViewSet)
-
-urlpatterns = [
-    path("api/", include(router.urls)),
->>>>>>> 3088b194546cdea7b93e972f49b434ac96092a6d
+    path("user/login/", api_views.MyTokenObtainPairView.as_view()),
+    path("user/refresh/", TokenRefreshView.as_view()),
+    path("user/register/", api_views.RegisterView.as_view()),
+    path(
+        "user/password-rest-email/<email>",
+        api_views.PasswordRegisterEmailVerifyApiView.as_view(),
+    ),
+    path("user/password-change/", api_views.PasswordChangeApiView.as_view()),
 ]
