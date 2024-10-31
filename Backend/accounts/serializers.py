@@ -1,50 +1,62 @@
-from django.contrib.auth import get_user_model
-from djoser.serializers import UserCreateSerializer
-from phonenumber_field.serializerfields import PhoneNumberField
+from accounts.models import Profile, User
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-User = get_user_model()
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["full_name"] = user.full_name
+        token["email"] = user.email
+        token["username"] = user.username
+        return token
+
 
 class UserSerializer(serializers.ModelSerializer):
-    gender = serializers.CharField(source="profile.gender")
-    phone_number = PhoneNumberField(source="profile.phone_number")
-    profile_photo = serializers.ImageField(source="profile.profile_photo")
-    city = serializers.CharField(source="profile.city")
-    first_name = serializers.SerializerMethodField()
-    last_name = serializers.SerializerMethodField()
-    full_name = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ["username", "full_name", "email"]
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["user", "images", "country", "full_name", "bio", "date"]
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password]
+    )
+    password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User
-        fields = [
-            "id",
-            "username",
-            "email",
-            "first_name",
-            "last_name",
-            "full_name",
-            "gender",
-            "phone_number",
-            "profile_photo",
-            "city",
-        ]
+        fields = ["full_name", "email", "password", "password2"]
 
-    def get_first_name(self, obj):
-        return obj.first_name.title() if obj.first_name else ""
+    def validate(self, attrs):
+        if attrs["password"] != attrs["password2"]:
+            raise serializers.ValidationError(
+                {"password": "password fields do not match!"}
+            )
 
-    def get_last_name(self, obj):
-        return obj.last_name.title() if obj.last_name else ""
+        return attrs
 
-    def get_full_name(self, obj):
-        return obj.get_full_name() 
-    
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        if instance.is_superuser:
-            representation["admin"] = True
-        return representation
+    def create(self, validated_data):
+        user = User.objects.create(
+            full_name=validated_data["full_name"],
+            email=validated_data["email"],
+        )
+        email_user, _ = user.email.split("@")
+        user.username = email_user
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
 
-class CreateUserSerializer(UserCreateSerializer):
-    class Meta(UserCreateSerializer.Meta):
+
+class UserLogin(serializers.ModelSerializer):
+    class Meta:
         model = User
-        fields = ["id", "username", "email", "first_name", "last_name", "password"]
+        fields = ["name", "email"]
