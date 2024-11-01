@@ -61,7 +61,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = ["id", "name"]
 
 
 class UserLogin(serializers.ModelSerializer):
@@ -77,9 +77,9 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class ReceptionSerializer(serializers.ModelSerializer):
-    category = CategorySerializers(
-        many=True
-    )  # Use the CategorySerializer for the ManyToMany field
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all()
+    )  # Single ForeignKey
 
     class Meta:
         model = Reception
@@ -90,26 +90,21 @@ class ReceptionSerializer(serializers.ModelSerializer):
             "order_name",
             "description",
             "price",
-            "category",  # Include the ManyToMany field
+            "category",  # This is a single category
             "created_at",
             "updated_at",
         ]
 
     def create(self, validated_data):
-        category_data = validated_data.pop("category")  # Extract category data
         reception = Reception.objects.create(
             **validated_data
-        )  # Create Reception instance
-        reception.category.set(category_data)  # Set the ManyToMany relationships
+        )  # Create the reception instance
         return reception
 
     def update(self, instance, validated_data):
-        category_data = validated_data.pop(
-            "category", None
-        )  # Extract category data if provided
-        if category_data is not None:
-            instance.category.set(category_data)  # Update ManyToMany relationships
-
+        instance.category = validated_data.get(
+            "category", instance.category
+        )  # Update the category
         instance.designer = validated_data.get("designer", instance.designer)
         instance.customer_name = validated_data.get(
             "customer_name", instance.customer_name
